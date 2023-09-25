@@ -1,7 +1,31 @@
-# Vue 3 + Vite
+# Vue 3 + Vite4
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 安装测试
 
-## Recommended IDE Setup
+```
+// 进入目录
+yarn
+// 启动server
+yarn dev
+// 打包
+yarn build
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 更新记录
+
+- 自动化路由
+- 封装 axios，支持 JWT
+- 封装 localStorage
+- 组件库使用 vant
+- title 动态修改
+
+```
+<script setup>
+import { useMeta } from "vue-meta";
+useMeta({
+  title: "用户中心",
+});
+</script>
+```
+
+- 使用 sass
