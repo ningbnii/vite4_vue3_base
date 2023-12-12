@@ -8,6 +8,9 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['swiper'],
+  },
   plugins: [
     // 解释一下visualizer插件，这个插件可以将打包后的文件以可视化的方式展示出来，方便我们分析
     visualizer({ open: true }),
