@@ -7,6 +7,10 @@
   <div>
     <van-button type="primary" size="small" :to="{ path: '/index/home' }">跳转/index/home</van-button>
   </div>
+
+  <div>
+    <van-button type="primary" size="small" :to="{ path: '/index/swiper' }">跳转/index/swiper</van-button>
+  </div>
 </template>
 <script setup>
 // import { getUserInfo } from '@/api/user'
@@ -15,5 +19,12 @@
 // getUserInfo().then(function (res) {
 //   console.log(res)
 // })
+
+import { showToast } from 'vant'
+
+showToast({
+  message: '入口页面',
+  duration: 1000,
+})
 </script>
 <style lang="scss" scoped></style>
