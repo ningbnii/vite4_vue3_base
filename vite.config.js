@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { Plugin as importToCDN } from 'vite-plugin-cdn-import'
 import { visualizer } from 'rollup-plugin-visualizer'
-import externalGlobals from 'rollup-plugin-external-globals'
+// import externalGlobals from 'rollup-plugin-external-globals'
 import viteCompression from 'vite-plugin-compression'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
@@ -61,20 +61,26 @@ export default defineConfig({
   server: {
     open: true,
   },
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
   build: {
     rollupOptions: {
       // 告诉打包工具，在external配置的包，都是外部引入的，不要打包到代码中
       external: ['vue', 'vant', 'vue-router', 'vue-meta', 'axios', 'qs', 'swiper'],
       plugins: [
-        externalGlobals({
-          vue: 'Vue',
-          vant: 'vant',
-          'vue-router': 'VueRouter',
-          'vue-meta': 'VueMeta',
-          axios: 'axios',
-          qs: 'qs',
-          swiper: 'Swiper',
-        }),
+        // 解释一下externalGlobals插件，这个插件可以将external配置的包，以全局变量的方式引入，方便我们在代码中使用
+        // externalGlobals({
+        //   vue: 'Vue',
+        //   vant: 'vant',
+        //   'vue-router': 'VueRouter',
+        //   'vue-meta': 'VueMeta',
+        //   axios: 'axios',
+        //   qs: 'qs',
+        //   swiper: 'Swiper',
+        // }),
         viteCompression({
           verbose: true,
           disable: false,
