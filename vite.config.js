@@ -13,11 +13,6 @@ export default defineConfig({
     visualizer({ open: true }),
     createHtmlPlugin({
       minify: true,
-      inject: {
-        data: {
-          swiperscript: '<script src="https://cdn.staticfile.org/Swiper/11.0.5/swiper-bundle.min.js"></script>',
-        },
-      },
     }),
     vue(),
     importToCDN({
