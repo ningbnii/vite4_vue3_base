@@ -56,13 +56,6 @@ export default defineConfig({
           var: 'qs',
           path: 'https://cdn.staticfile.org/qs/6.11.2/qs.min.js',
         },
-        // swiper
-        // {
-        //   name: 'swiper',
-        //   var: 'Swiper',
-        //   // path: 'https://cdn.staticfile.org/Swiper/11.0.5/swiper-bundle.min.js',
-        //   css: 'https://cdn.staticfile.org/Swiper/11.0.5/swiper-bundle.min.css',
-        // },
       ],
     }),
   ],
