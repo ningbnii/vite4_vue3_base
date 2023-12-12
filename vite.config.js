@@ -53,7 +53,7 @@ export default defineConfig({
           var: 'qs',
           path: 'https://cdn.staticfile.org/qs/6.11.2/qs.min.js',
         },
-        swiper
+        // swiper
         {
           name: 'swiper',
           var: 'Swiper',
