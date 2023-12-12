@@ -1,53 +1,42 @@
 <template>
-  <swiper :modules="[Virtual]" :direction="'vertical'" virtual>
-    <swiper-slide v-for="(slideContent, index) in slides" :key="index" :virtualIndex="index">
-      <van-button type="primary" size="small" @click="goToDetail(slideContent)">{{ slideContent }}</van-button>
-    </swiper-slide>
-  </swiper>
+  <swiper-container
+    :slides-per-view="3"
+    :space-between="spaceBetween"
+    :centered-slides="true"
+    :pagination="{
+      hideOnClick: true,
+    }"
+    :breakpoints="{
+      768: {
+        slidesPerView: 3,
+      },
+    }"
+    @swiperprogress="onProgress"
+    @swiperslidechange="onSlideChange"
+  >
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+  </swiper-container>
 </template>
-<script>
-import { Virtual } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { useRouter } from 'vue-router'
 
-import 'swiper/css'
-import 'swiper/css/virtual'
+<script setup>
+const spaceBetween = 10
+const onProgress = (e) => {
+  const [swiper, progress] = e.detail
+  console.log(progress)
+}
 
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-
-  setup() {
-    const router = useRouter()
-
-    // Create array with 1000 slides
-    const slides = Array.from({ length: 1000 }).map((el, index) => `Slide ${index + 1}`)
-
-    const goToDetail = (slideContent) => {
-      // 跳转到index/detail页面,并传递参数
-      router.push({
-        path: '/index/detail',
-        query: {
-          slideContent,
-        },
-      })
-    }
-    return {
-      slides,
-      Virtual,
-      goToDetail,
-    }
-  },
+const onSlideChange = (e) => {
+  console.log('slide changed')
 }
 </script>
 
 <style lang="scss">
-.swiper {
+swiper-container {
   width: 100%;
   height: 100vh;
-  .swiper-slide {
+  swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;

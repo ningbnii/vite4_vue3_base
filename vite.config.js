@@ -8,16 +8,21 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  optimizeDeps: {
-    exclude: ['swiper'],
-  },
   plugins: [
     // 解释一下visualizer插件，这个插件可以将打包后的文件以可视化的方式展示出来，方便我们分析
     visualizer({ open: true }),
     createHtmlPlugin({
       minify: true,
     }),
-    vue(),
+    vue({
+      // swiper-
+      template: {
+        compilerOptions: {
+          // 解释一下isCustomElement这个配置，这个配置可以让我们在vue文件中使用自定义标签，不会报错，比如swiper，这里我们配置了swiper开头的标签都是自定义标签，不会报错，这样我们就可以在vue文件中使用swiper标签了，而不需要在main.js中引入swiper
+          isCustomElement: (tag) => tag === 'swiper' || tag.startsWith('swiper-'),
+        },
+      },
+    }),
     importToCDN({
       modules: [
         {
@@ -52,12 +57,12 @@ export default defineConfig({
           path: 'https://cdn.staticfile.org/qs/6.11.2/qs.min.js',
         },
         // swiper
-        {
-          name: 'swiper',
-          var: 'Swiper',
-          path: 'https://cdn.staticfile.org/Swiper/11.0.5/swiper-bundle.min.js',
-          css: 'https://cdn.staticfile.org/Swiper/11.0.5/swiper-bundle.min.css',
-        },
+        // {
+        //   name: 'swiper',
+        //   var: 'Swiper',
+        //   // path: 'https://cdn.staticfile.org/Swiper/11.0.5/swiper-bundle.min.js',
+        //   css: 'https://cdn.staticfile.org/Swiper/11.0.5/swiper-bundle.min.css',
+        // },
       ],
     }),
   ],
@@ -72,7 +77,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       // 告诉打包工具，在external配置的包，都是外部引入的，不要打包到代码中
-      external: ['vue', 'vant', 'vue-router', 'vue-meta', 'axios', 'qs', 'swiper'],
+      external: ['vue', 'vant', 'vue-router', 'vue-meta', 'axios', 'qs'],
       plugins: [
         // 解释一下externalGlobals插件，这个插件可以将external配置的包，以全局变量的方式引入，方便我们在代码中使用
         // externalGlobals({
